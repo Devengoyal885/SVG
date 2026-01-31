@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG Drawing</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+
+<svg id="drawingArea" width="1520" height="1520">
+
+  
+  <rect 
+    x="10" y="10" 
+    width="1200" height="800" 
+    rx="20"
+    fill="white" 
+    stroke="black" 
+    stroke-width="4"/>
+
+</svg>
+
+<script>
+  var svg = document.getElementById("drawingArea");
+  var isDrawing = false;
+  var lastX = 0;
+  var lastY = 0;
+
+  svg.addEventListener("mousedown", function (e) {
+    isDrawing = true;
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+  });
+
+  svg.addEventListener("mousemove", function (e) {
+    if (isDrawing === false) {
+      return;
+    }
+
+    var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+
+    line.setAttribute("x1", lastX);
+    line.setAttribute("y1", lastY);
+    line.setAttribute("x2", e.offsetX);
+    line.setAttribute("y2", e.offsetY);
+    line.setAttribute("stroke", "black");
+    line.setAttribute("stroke-width", "2");
+
+    svg.appendChild(line);
+
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+  });
+
+  svg.addEventListener("mouseup", function () {
+    isDrawing = false;
+  });
+
+  svg.addEventListener("mouseleave", function () {
+    isDrawing = false;
+  });
+</script>
+
+</body>
+</html>
