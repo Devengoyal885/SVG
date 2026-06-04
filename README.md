@@ -38,7 +38,6 @@ This project showcases:
 * HTML5
 * CSS3
 * JavaScript
-* SVG
 
 ---
 
